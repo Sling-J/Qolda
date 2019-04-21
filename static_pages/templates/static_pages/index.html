@@ -14,8 +14,13 @@
             
             <div class="adaptive-sign">
                <ul class="adaptive-sign__list">
-                  <li><a href="{% url 'accounts:signin' %}">Вход</a></li>
-                  <li><a href="{% url 'accounts:signup' %}">Регистрация</a></li>
+                  {% if user.is_authenticated %}
+                     <li><a href="{% url 'accounts:logout' %}">Выйти</a></li>
+                     <li><a href="{% url 'accounts:profile' %}">Профиль</a></li>
+                  {% else %}
+                     <li><a href="{% url 'accounts:signin' %}">Вход</a></li>
+                     <li><a href="{% url 'accounts:signup' %}">Регистрация</a></li>
+                  {% endif %}
                </ul>
             </div>
 
@@ -29,8 +34,13 @@
 
                <div class="sign">
                   <ul class="sign-list">
-                     <li><a href="{% url 'accounts:signin' %}">Вход</a></li>
-                     <li><a href="{% url 'accounts:signup' %}">Регистрация</a></li>
+                     {% if user.is_authenticated %}
+                        <li><a href="{% url 'accounts:logout' %}">Выйти</a></li>
+                        <li><a href="{% url 'accounts:profile' %}">Профиль</a></li>
+                     {% else %}
+                        <li><a href="{% url 'accounts:signin' %}">Вход</a></li>
+                        <li><a href="{% url 'accounts:signup' %}">Регистрация</a></li>
+                     {% endif %}
                   </ul>
                </div>
             </div>

@@ -3,8 +3,6 @@
 {% block title %} Sign in {% endblock %}
 {% block content %} 
 
-<form action="{% url 'accounts:signin' %}" method='POST'>
-	{% csrf_token %}
 	<div class="sign-wrapper">
 		<div class="sign">
 			<div class="logo">
@@ -12,23 +10,29 @@
 				<p>Вход Qolda</p>
 			</div>
 			<div class="sign-up">
-				<!-- <input type="email" placeholder="Email">
-				<input type="password" placeholder="Пароль"> -->
-				{{ form }}
-				<button type="submit">Войти</button>
-				{% if error %}
-				<p class="error">{{ error }}</p>
+				{% if messages %}
+					{% for mess in messages %}
+						<div class="alert alert-success">
+							{{ mess }}
+						</div>
+					{% endfor %}
 				{% endif %}
-				<p>
-					<a href="#">Забыли пароль?</a>
-				</p>
-				<p>Еще нет аккаунта?
-					<a href="{% url 'accounts:signup' %}">Зарегистрируйтесь</a>
-				</p>
+				{% if user.is_authenticated %}
+					<p>Вы уже авторизованы</p>
+					<a href="{% url 'accounts:profile' %}">Профиль</a>
+				{% else %}
+					<div>
+						<h2>Авторизация на сайте</h2>
+						<form method="POST">
+							{% csrf_token %}
+							{{ form }}
+							<button type="submit">Войти</button>
+						</form>
+					</div>
+   			{% endif %}
 			</div>
 		</div>
 	</div>
-</form>
 {% endblock %}
 
 <!--  -->
