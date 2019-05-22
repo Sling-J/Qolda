@@ -11,12 +11,13 @@
             {% csrf_token %}
             <div class="advice-search">
                <input type="search" placeholder="Найти рекомендаций" name="search">
-                <select name = "rec_profession">
-                    <option value="None">Выберите профессию</option>
-                    {% for profession in professions %}
-                       <option value="{{ profession.id }}">{{ profession.name }}</option>
-                    {% endfor %}
-                </select>
+               <button class="find-btn">Поиск</button>
+               <select name = "rec_profession">
+                  <option value="None">Выберите профессию</option>
+                  {% for profession in professions %}
+                     <option value="{{ profession.id }}">{{ profession.name }}</option>
+                  {% endfor %}
+               </select>
             </div>
             <hr>
             <div class="advice-search">

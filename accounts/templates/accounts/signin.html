@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %} Sign in {% endblock %}
 {% block content %} 
-
 	<div class="sign-wrapper">
 		<div class="sign">
 			<div class="logo">
@@ -22,17 +21,16 @@
 					<a href="{% url 'accounts:profile' %}">Профиль</a>
 				{% else %}
 					<div>
-						<h2>Авторизация на сайте</h2>
 						<form method="POST">
 							{% csrf_token %}
 							{{ form }}
 							<button type="submit">Войти</button>
 						</form>
+
+						<p>Нет аккаунта? <a href="{% url 'accounts:signup' %}">Регистрация</a></p>
 					</div>
-   			{% endif %}
+				{% endif %}
 			</div>
 		</div>
 	</div>
 {% endblock %}
-
-<!--  -->

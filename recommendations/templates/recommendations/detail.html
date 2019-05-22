@@ -52,6 +52,10 @@
                {% csrf_token %}
                {{ comment_form }}
                <input name='recommendation_id' type='hidden' value="{{ recommendation.id }}"/>
+               <div class="focus-comment">
+                  <button id="comment-cancel-btn" class="comment-btn" type="button">Отмена</button>
+                  <button id="comment-add-btn" class="comment-btn" disabled>Оставить комментарий</button>
+               </div>
             </form>
 
             {% for comment in recommendation.comment_set.all %}
@@ -69,5 +73,24 @@
       </div>
    </div>
 </div>
+
+<script>
+   setTimeout(() => {
+      const inputField = document.querySelectorAll('.comments input')[1];
+      const commentAddBtn = document.getElementById('comment-add-btn');
+      const commentCancelBtn = document.getElementById('comment-cancel-btn');
+
+      commentCancelBtn.addEventListener('click', () => {
+         inputField.value = ''
+         commentAddBtn.disabled = true
+      })
+
+      inputField.addEventListener('input', event => {
+         event.currentTarget.value.length === 0 ? 
+            commentAddBtn.disabled = true : 
+            commentAddBtn.disabled = false
+      })
+   }, 300)
+</script>
 
 {% endblock %}
