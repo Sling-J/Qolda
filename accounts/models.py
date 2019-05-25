@@ -12,10 +12,11 @@ class Profile(models.Model):
    phone = models.IntegerField(null=True,blank=True)
    country = models.CharField(max_length=100, blank=True)
    city = models.CharField(max_length=100, blank=True)
+   job = models.CharField(max_length=100, blank=True)
 
 
    def __str__(self):
-      return f'Профиль пользователя {self.user.first_name} {self.user.last_name}'
+      return f'Профиль пользователя {self.user.username}'
 
 
    # def get_absolute_url(self):

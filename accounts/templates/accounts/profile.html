@@ -1,6 +1,6 @@
 {% extends 'static_pages/parent.html' %}
 {% load static %}
-{% block title %} Sign in {% endblock %}
+{% block title %}{{ user.username }}{% endblock %}
 
 {% block content %}
 	<div id="app">
@@ -12,19 +12,43 @@
 					<table class="personal-info">
 						<tr>
 							<th>Дата рождения:</th>
-							<td>12/02/2000</td>
+							<td>
+								{% if user.profile.date_birth %}
+									{{ user.profile.date_birth }}
+								{% else %}
+									Не задано
+								{% endif %}
+							</td>
 						</tr>
 						<tr>
 							<th>Телефон:</th>
-							<td>+7 775 798 9824</td>
+							<td>
+								{% if user.profile.phone %}
+									{{ user.profile.phone }}
+								{% else %}
+									Не задано
+								{% endif %}
+							</td>
 						</tr>
 						<tr>
 							<th>Страна:</th>
-							<td>Казахстан</td>
+							<td>
+								{% if user.profile.country %}
+									{{ user.profile.country }}
+								{% else %}
+									Не задано
+								{% endif %}
+							</td>
 						</tr>
 						<tr>
 							<th>Город:</th>
-							<td>Астана</td>
+							<td>
+								{% if user.profile.city %}
+									{{ user.profile.city }}
+								{% else %}
+									Не задано
+								{% endif %}
+							</td>
 						</tr>
 						<tr>
 							<th>Почта:</th>
@@ -38,14 +62,33 @@
 					<ul class="expertise-info">
 						<li v-for="skill in skills">[[ skill ]]</li>
 					</ul>
+					{% if messages %}
+						{% for mess in messages %}
+							<div>
+								{{ mess }}
+							</div>
+						{% endfor %}
+            	{% endif %}
 				</div>
 
 				<div class="profile-info__about">
 					<h2 class="profile-info__title">Обо мне</h2>
-					<p class="profile-info__job">Frontend Developer</p>
+					<p class="profile-info__job">
+						{% if user.profile.position %}
+							{{ user.profile.position }}
+						{% else %}
+							Не задано
+						{% endif %}
+					</p>
+					<p>
+						{% if user.profile.job %} {{user.profile.job}} {% endif %}
+					</p>
 					<p class="profile-info__text">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda doloribus minima quisquam similique! Aperiam autem doloribus
-						incidunt, ipsam ipsum libero minus natus quibusdam repudiandae veritatis. Incidunt ullam unde velit vero?
+						{% if user.profile.information %}
+							{{ user.profile.information }}
+						{% else %}
+							Не задано
+						{% endif %}
 					</p>
 				</div>
 			</div>

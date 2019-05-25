@@ -1,48 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
-# class SigninForm(forms.Form):
-#     email = forms.CharField(
-#     label = "",
-#     widget = forms.TextInput(attrs={
-#         'class':'email',
-#         'placeHolder':'Email'
-#     }))
-#     password = forms.CharField(
-#     label = "",
-#     widget = forms.PasswordInput(attrs={
-#         'class':'password',
-#         'placeholder':'Введите пароль'
-#     }))
-
-
-# class SignupForm(forms.Form):
-#     email = forms.CharField(
-#         label = "",
-#         widget = forms.TextInput(attrs={
-#         'class':'input',
-#         'placeHolder':'Email'
-#     }))
-#     username = forms.CharField(
-#         label = "",
-#         widget = forms.TextInput(attrs={
-#         'class':'input',
-#         'placeHolder':'Полное имя'
-#     }))
-#     password = forms.CharField(
-#         label = "",
-#         widget = forms.PasswordInput(attrs={
-#         'class':'input',
-#         'placeholder':'Пароль'
-#     }))
-#     password_repeat = forms.CharField(
-#         label = "",
-#         widget = forms.PasswordInput(attrs={
-#         'class':'input',
-#         'placeholder':'Введите пароль повторно'
-#     }))
-
+from .models import Profile
+from django.core.exceptions import ValidationError
 
 class UserOurRegistration(UserCreationForm):
    email = forms.EmailField(required=True)
@@ -59,5 +19,38 @@ class UserOurRegistration(UserCreationForm):
             'password1': forms.PasswordInput(attrs={'class':'input', 'placeHolder':'Введите пароль'}),
             'password2': forms.PasswordInput(attrs={'class':'input', 'placeHolder':'Введите пароль повторно'})
         } 
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ('username','email')
+
+    def clean_username(self):
+        new_username = self.cleaned_data['username']
+        print(new_username)
+        if User.objects.filter(username=new_username).exists():
+            raise ValidationError('Имя пользователя {} уже существует.'.format(new_username))
+        return new_username
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = (
+            'position',
+            'job',
+            'date_birth', 
+            'phone', 
+            'country',
+            'city',
+            'img'
+        )
+    def __init__(self, *args, **kwargs):
+        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['img'].label = "Изображение профиля"
+        
+        
     
     
