@@ -40,6 +40,7 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = (
             'position',
+            'information',
             'job',
             'date_birth', 
             'phone', 
@@ -49,6 +50,13 @@ class ProfileUpdateForm(forms.ModelForm):
         )
     def __init__(self, *args, **kwargs):
         super(ProfileUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['position'].label = "Должность"
+        self.fields['information'].label = "О себе"
+        self.fields['job'].label = "Место работы"
+        self.fields['date_birth'].label = "Дата рождения"
+        self.fields['phone'].label = "Номер телефона"
+        self.fields['country'].label = "Страна"
+        self.fields['city'].label = "Город"
         self.fields['img'].label = "Изображение профиля"
         
         
