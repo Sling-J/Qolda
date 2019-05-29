@@ -20,15 +20,15 @@
                   </p>
                </div>
                <div class="star">
-                  <button>
-                     <i class="fa fa-star" aria-hidden="true"></i>Star
+                  <button type="button">
+                     <i class="fa fa-star" aria-hidden="true"></i>Stars
                   </button>
-                  <span class="quantity-star">0</span>
+                  <span class="quantity-star">{{ user.star.count }}</span>
                </div>
             </div>
             <div class="edit-profile">
-               <a href="#modal-full" uk-toggle>Редактировать профиль</a>
-               <div id="modal-full" class="uk-modal-full" uk-modal>
+               <a href="{% url 'accounts:settings_url' %}" uk-toggle>Редактировать профиль</a>
+               <!-- <div id="modal-full" class="uk-modal-full" uk-modal>
                   <div class="uk-modal-dialog">
                      <button class="uk-modal-close-full delete-svg uk-close-large" type="button" uk-close></button>
                      <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
@@ -52,7 +52,7 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> -->
             </div>
          </div>
       </div>
@@ -81,7 +81,7 @@
                         </a>
                      </li>
                      <li>
-                        <a href="{% url 'questions:index' %}">Профориентационный тест
+                        <a href="{% url 'accounts:test_url' %}">Профориентационный тест
                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                         </a>
                      </li>
@@ -128,7 +128,7 @@
             </div>
             <ul class="menu-2">
                <li>
-                  <a href="{% url 'questions:index' %}" title="Профориентационный тест">Проф. тест
+                  <a href="{% url 'accounts:test_url' %}" title="Профориентационный тест">Проф. тест
                      <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                   </a>
                </li>

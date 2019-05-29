@@ -1,0 +1,32 @@
+{% extends 'static_pages/parent.html' %}
+{% block title %}Настройки аккаунта{% endblock %}
+
+{% block content %}
+   <div id="app">
+      <div class="edit-profile-box">
+         <h1>Редактировать профиль</h1>
+         <div style="text-align: right;">
+            <a href="{% url 'accounts:profile' %}">Главная</a> /
+            <a href="{% url 'accounts:test_url' %}">Профориентационный тест</a> / 
+            <a href="{% url 'accounts:logout' %}">Выход</a>
+         </div>
+         <div class="edit-personal">
+            <h2>Личная информация</h2>
+         </div>
+
+         <hr>
+
+         <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+
+            <hr>
+
+            <div class="edit-save">
+               <button type="submit">Сохранить</button>
+            </div>
+         </form>
+      </div> 
+   </div>
+{% endblock%}

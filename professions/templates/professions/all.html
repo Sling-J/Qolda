@@ -33,10 +33,18 @@
                         <p>Frontend Developer</p>
                      </div>
                      <div class="users-stars">
-                        <button>
+                        {% if user.is_authenticated %}
+                           <form method="POST">
+                              {% csrf_token %}
+                              <button type="submit" value="{{ user.id }}" name="user_id">
+                                 <i class="fa fa-star" aria-hidden="true"></i>{% if request.user in user.star.liked.all %}Unstar{% else %}Star{% endif %}
+                              </button>
+                              <span class="quantity-star">{{ user.star.count }}</span>
+                           </form>
+                        {% else %}
                            <i class="fa fa-star" aria-hidden="true"></i>Star
-                        </button>
-                        <span class="quantity-star">0</span>
+                           <span class="quantity-star">{{ user.star.count }}</span>
+                        {% endif %}
                      </div>
                   </div>
                </a>

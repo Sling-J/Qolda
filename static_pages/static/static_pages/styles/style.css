@@ -2253,4 +2253,69 @@ h6 {
   box-shadow: inset -1px -1px 18px -5px rgba(0,0,0,0.75);
 }
 
+.edit-profile-box input,
+.edit-profile-box textarea {
+   border: none;
+   border-bottom: 1px solid #777777;
+   outline: none;
+   display: block;
+   padding: 7px 5px;
+   margin: 5px 0;
+   width: 100%;
+}
+
+.edit-profile-box textarea {
+   border: 1px solid #777777;
+   resize: vertical;
+   min-height: 100px;
+}
+
+.edit-profile-box input[type="file"] {
+   border: none;
+}
+
+.edit-profile-box input:focus {
+   border-bottom: 1px solid #3D93E3;
+}
+
+.edit-profile-box textarea:focus {
+   border: 1px solid #3D93E3;
+}
+
+.sign-up button {
+   display: block !important;
+   margin: 0 auto;
+}
+
+.test-result h1 {
+   margin-bottom: 20px;
+   text-align: center;
+}
+
+.test-result {
+   display: none;
+   max-width: 700px;
+   margin: 0 auto;
+}
+
+.test-result ul li {
+   border-bottom: 1px solid #aaa;
+   padding: 10px 0;
+}
+
+.test-result a {
+   text-align: center;
+   display: block;
+   margin-top: 10px;
+   color: #3D93E3;
+   text-decoration: none;
+}
+
+.test-wrapper {
+   background: #F0F0F0;
+   padding-top: 60px;
+   padding-bottom: 60px;
+}
+
+
 /*# sourceMappingURL=style.css.map */

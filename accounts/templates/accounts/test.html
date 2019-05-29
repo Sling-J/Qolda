@@ -1,0 +1,86 @@
+{% extends 'static_pages/parent.html' %}
+{% block title %}Настройки аккаунта{% endblock %}
+
+{% block content %}
+<div id="app">
+   {% include 'static_pages/partials/header_nav.html' %}
+   <div class="test-wrapper">
+      <div class="prof-test">
+         <div class="question">
+            <h1 class="js-question-title">Работать с дизйном или разработка</h1>
+         </div>
+         <form class="answer-box-form" method="GET">
+            <div class="answer-box">
+               <label class="test-answer-a" for="answer-a">
+                  <input id="answer-a" class="answers-variant" type="radio" name="answer" value="Дизайн">
+                  <div class="overlay-answer__bg"></div>
+                  <p class="overlay-answer__text">Дизайн</p>
+               </label>
+   
+               <label class="test-answer-b" for="answer-b">
+                  <input id="answer-b" class="answers-variant" type="radio" name="answer" value="Разработка">
+                  <div class="overlay-answer__bg"></div>
+                  <p class="overlay-answer__text">Разработка</p>
+               </label>
+            </div>
+            <div class="question-data">
+               <button class="next-question send-test">Далее</button>
+            </div>
+         </form>
+      </div>
+      <div class="test-result">
+         <h1>Тест пройден</h1>
+         <div>
+            <p>Список профессий по вашим предпочтения</p>
+            <ul>
+               <li>Frontend разработчик</li>
+               <li>UX/UI Аналитик</li>
+               <li>Тестировщик веб компонентов</li>
+            </ul>
+            <a href="{% url 'static_pages:index' %}">На главную</a>
+         </div>
+      </div>
+   </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script>
+   $(document).ready(function(){
+      const arr = [];
+
+      $('.send-test').on('click', function(e) {
+         const answersVariant = $('.answers-variant');
+         let inputValue;
+
+         for (let item of answersVariant) {
+            if (item.checked) inputValue = item.value;
+         }
+
+         const data = { inputValue }
+
+         $.ajax({
+            type: 'GET',
+            url: "{% url 'accounts:choose_url' %}",
+            data: data,
+            success: function(data) {
+               $('.answers-variant')[0].value = data.first_new_variant;
+               $('.overlay-answer__text')[0].textContent = data.first_new_variant;
+
+               $('.answers-variant')[1].value = data.second_new_variant;
+               $('.overlay-answer__text')[1].textContent = data.second_new_variant;
+
+               $('.js-question-title').text(data.question)
+            }
+         })
+
+         arr.push(data);
+
+         if (arr.length === 4) {
+            $('.prof-test').css('display', 'none')
+            $('.test-result').css('display', 'block')
+         }
+
+         e.preventDefault();
+      })
+   })
+</script>
+{% endblock content %}
